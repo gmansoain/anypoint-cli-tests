@@ -35,6 +35,6 @@ jobs:
     - name: Print api id
       run: cat ./api_id.txt
     - name: create env variable from api_id
-      run: export API_ID=$(cat ./api_id.txt)
-    - name: check env variable
-      run: env
+      run: |
+        export API_ID=$(cat ./api_id.txt)
+        env
