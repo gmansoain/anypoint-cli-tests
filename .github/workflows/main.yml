@@ -49,6 +49,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GON_GITHUB_TOKEN }}
       run: |
         export VAR_API_ID=$(cat ./api_id.txt)
-        gh variable set API_ID --environment Development --body "$VAR_API_ID"
+        gh variable set API_ID --env Development --body "$VAR_API_ID"
         
         
