@@ -17,3 +17,11 @@ jobs:
     - name: check version
       run: |
         anypoint-cli-v4 --version
+    - name: Set Authentication
+      run: |
+        anypoint-cli-v4 conf username gonmule
+        anypoint-cli-v4 conf password Scipio235ac!
+        anypoint-cli-v4 conf organization 37aa8fe0-4188-44c1-a9b5-bdce3ca12f0b
+    - name: Verify configuration
+      run: |
+        anypoint-cli-v4 account:environment:list
