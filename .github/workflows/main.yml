@@ -44,3 +44,12 @@ jobs:
       run: |
         export API_ID=$(cat ./api_id.txt)
         env
+    - name: create variable in GH environment
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        export API_ID=$(cat ./api_id.txt)
+        gh status
+        gh variable set API_ID --env Development $API_ID
+        
+        
