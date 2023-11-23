@@ -25,4 +25,10 @@ jobs:
       run: |
         anypoint-cli-v4 conf username $MULE_USERNAME
         anypoint-cli-v4 conf password $MULE_PASSWORD
-        anypoint-cli-v4 account:environment:list
+    - name: Create APIM instance in Dev
+      env:
+        ASSET_ID: ${{ vars.ASSET_ID }}
+        ASSET_VERSION: ${{ vars.ASSET_VERSION }}
+        MULE_BG_ID: ${{ vars.MULE_BG_ID }}
+      run: |
+          anypoint-cli-v4 api-mgr:api:manage -m --deploymentType=cloudhub --organization $MULE_BG_ID --environment=Development $ASSET_ID $ASSET_VERSION | sed -e "s/Created new API with ID: //g" > ./api_id.txt
