@@ -19,12 +19,13 @@ jobs:
         anypoint-cli-v4 --version
     - name: Set Authentication
       env:
-        MULE_USERNAME: ${{ secrets.MULE_USERNAME }}
-        MULE_PASSWORD: ${{ secrets.MULE_PASSWORD }}
+        MULE_CLIENT_ID: ${{ secrets.MULE_CLIENT_ID }}
+        MULE_CLIENT_SECRET: ${{ secrets.MULE_CLIENT_SECRET }}
         MULE_ORG_ID: ${{ vars.MULE_ORG_ID }}
       run: |
-        anypoint-cli-v4 conf username $MULE_USERNAME
-        anypoint-cli-v4 conf password $MULE_PASSWORD
+        anypoint-cli-v4 conf client_id $MULE_CLIENT_ID
+        anypoint-cli-v4 conf client_secret $MULE_CLIENT_SECRET
+        anypoint-cli-v4 conf organization $MULE_ORG_ID
     - name: Create APIM instance in Dev
       env:
         ASSET_ID: ${{ vars.ASSET_ID }}
