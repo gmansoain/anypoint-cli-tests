@@ -26,36 +26,3 @@ jobs:
         anypoint-cli-v4 conf client_id $MULE_CLIENT_ID
         anypoint-cli-v4 conf client_secret $MULE_CLIENT_SECRET
         anypoint-cli-v4 conf organization $MULE_ORG_ID
-    - name: Create APIM instance in Dev
-      env:
-        ASSET_ID: ${{ vars.ASSET_ID }}
-        ASSET_VERSION: ${{ vars.ASSET_VERSION }}
-        MULE_BG_ID: ${{ vars.MULE_BG_ID }}
-      run: |
-          anypoint-cli-v4 api-mgr:api:manage -m --deploymentType=cloudhub --organization fc9e3283-a489-4e88-99aa-cceea4aa5ea1 --environment=Development $ASSET_ID $ASSET_VERSION | sed -e "s/Created new API with ID: //g" > ./api_id.txt
-
-    - name: Create variable in Dev environment
-      env:
-        GITHUB_TOKEN: ${{ secrets.GON_GITHUB_TOKEN }}
-      run: |
-      #  export VAR_API_ID_DEV=$(cat ./api_id_dev.txt)
-      #  gh variable set API_ID --env Development --body "$VAR_API_ID_DEV"
-        gh variable set API_ID --env Development --body $(cat ./api_id_dev.txt)
-
-    - name: Create APIM instance in Prod
-      env:
-        ASSET_ID: ${{ vars.ASSET_ID }}
-        ASSET_VERSION: ${{ vars.ASSET_VERSION }}
-        MULE_BG_ID: ${{ vars.MULE_BG_ID }}
-      run: |
-          anypoint-cli-v4 api-mgr:api:manage -m --deploymentType=cloudhub --organization fc9e3283-a489-4e88-99aa-cceea4aa5ea1 --environment=Development $ASSET_ID $ASSET_VERSION | sed -e "s/Created new API with ID: //g" > ./api_id.txt
-    - name: create variable in Prod environment
-      env:
-        GITHUB_TOKEN: ${{ secrets.GON_GITHUB_TOKEN }}
-      run: |
-      # export VAR_API_ID_PROD=$(cat ./api_id_prod.txt)
-      # gh variable set API_ID --env Production --body "$VAR_API_ID_PROD"
-        gh variable set API_ID --env Production --body $(cat ./api_id_prod.txt)
-      
-        
-        
