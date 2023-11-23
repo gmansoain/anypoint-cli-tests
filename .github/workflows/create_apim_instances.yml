@@ -19,8 +19,8 @@ jobs:
         anypoint-cli-v4 --version
     - name: Set Authentication
       env:
-        ANYPOINT_CLIENT_ID: ${{ secrets.MULE_CLIENT_ID }}
-        ANYPOINT_CLIENT_SECRET: ${{ secrets.MULE_CLIENT_SECRET }}
-        ANYPOINT_ORG: ${{ vars.MULE_ORG_ID }}
+        MULE_USERNAME: ${{ secrets.MULE_USERNAME }}
+        MULE_PASSWORD: ${{ secrets.MULE_PASSWORD }}
+        MULE_ORG_ID: ${{ vars.MULE_ORG_ID }}
       run: |
         anypoint-cli-v4 account:environment:list
