@@ -26,3 +26,6 @@ jobs:
         anypoint-cli-v4 conf client_id $MULE_CLIENT_ID
         anypoint-cli-v4 conf client_secret $MULE_CLIENT_SECRET
         anypoint-cli-v4 conf organization $MULE_ORG_ID
+    - name: Verify configuration
+      run: |
+        anypoint-cli-v4 account:environment:list
