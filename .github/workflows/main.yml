@@ -48,7 +48,6 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        export API_ID=$(cat ./api_id.txt)
         gh status
         gh variable set API_ID --env Development 1111
         
