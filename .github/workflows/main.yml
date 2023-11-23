@@ -27,4 +27,6 @@ jobs:
         anypoint-cli-v4 account:environment:list
     - name: Create APIM instance
       run: |
-          anypoint-cli-v4 api-mgr:api:manage -m --deploymentType=cloudhub --organization fc9e3283-a489-4e88-99aa-cceea4aa5ea1 --environment=Development slack-system-api 1.0.1
+        anypoint-cli-v4 api-mgr:api:manage -m --deploymentType=cloudhub --organization fc9e3283-a489-4e88-99aa-cceea4aa5ea1 --environment=Development slack-system-api 1.0.1 | sed -e "s/Created new API with ID: //g" > ./api_id.txt
+    - name: Print api id
+      run: cat ./api_id.txt
