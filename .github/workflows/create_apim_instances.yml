@@ -23,8 +23,8 @@ jobs:
         MULE_CLIENT_SECRET: ${{ secrets.MULE_CLIENT_SECRET }}
         MULE_ORG_ID: ${{ vars.MULE_ORG_ID }}
       run: |
-        anypoint-cli-v4 conf client_id $MULE_CLIENT_ID
-        anypoint-cli-v4 conf client_secret $MULE_CLIENT_SECRET
+        anypoint-cli-v4 conf client_id 6a7bf91079a84bab983f25b3e0138069
+        anypoint-cli-v4 conf client_secret A58E47317Df64c6b87B8281600fb7b67
         anypoint-cli-v4 conf organization $MULE_ORG_ID
     - name: Verify configuration
       run: |
