@@ -46,7 +46,7 @@ jobs:
         env
     - name: create variable in GH environment
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GON_GITHUB_TOKEN }}
       run: |
         gh status
         gh variable set API_ID --env Development 1111
