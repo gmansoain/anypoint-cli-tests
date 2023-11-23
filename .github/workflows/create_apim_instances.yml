@@ -33,9 +33,10 @@ jobs:
         MULE_BG_ID: ${{ vars.MULE_BG_ID }}
       run: |
         anypoint-cli-v4 api-mgr:api:manage -m --deploymentType=cloudhub --organization $MULE_BG_ID --environment=Development $ASSET_ID $ASSET_VERSION | sed -e "s/Created new API with ID: //g" > ./api_id_dev.txt
-    - name: create variable in Dev environment
+    
+    - name: Create variable in Dev environment
       env:
-          GITHUB_TOKEN: ${{ secrets.GON_GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GON_GITHUB_TOKEN }}
       run: |
       #  export VAR_API_ID_DEV=$(cat ./api_id_dev.txt)
       #  gh variable set API_ID --env Development --body "$VAR_API_ID_DEV"
@@ -50,7 +51,7 @@ jobs:
         anypoint-cli-v4 api-mgr:api:manage -m --deploymentType=cloudhub --organization $MULE_BG_ID --environment=Production $ASSET_ID $ASSET_VERSION | sed -e "s/Created new API with ID: //g" > ./api_id_prod.txt
     - name: create variable in Prod environment
       env:
-          GITHUB_TOKEN: ${{ secrets.GON_GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GON_GITHUB_TOKEN }}
       run: |
       # export VAR_API_ID_PROD=$(cat ./api_id_prod.txt)
       # gh variable set API_ID --env Production --body "$VAR_API_ID_PROD"
