@@ -1,0 +1,52 @@
+name: Create API Manager instances
+on:
+  workflow_dispatch:
+
+jobs:
+  create_apim_instance:
+    runs-on: ubuntu-latest
+    environment: Development
+    steps:
+    - uses: actions/checkout@v4
+    # Install Node on the runner
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 18
+    - name: Install anypoint-cli
+      run: |
+        npm install -g anypoint-cli-v4
+    - name: check version
+      run: |
+        anypoint-cli-v4 --version
+    - name: Set Authentication
+      run: |
+        anypoint-cli-v4 conf username gonmule
+        anypoint-cli-v4 conf password Scipio235ac!
+        anypoint-cli-v4 conf organization 37aa8fe0-4188-44c1-a9b5-bdce3ca12f0b
+    - name: Create APIM instance in Dev
+      env:
+        ASSET_ID: ${{ vars.ASSET_ID }}
+        ASSET_VERSION: ${{ vars.ASSET_VERSION }}
+      run: |
+        anypoint-cli-v4 api-mgr:api:manage -m --deploymentType=cloudhub --organization fc9e3283-a489-4e88-99aa-cceea4aa5ea1 --environment=Development $ASSET_ID $ASSET_VERSION | sed -e "s/Created new API with ID: //g" > ./api_id_dev.txt
+    - name: create variable in Dev environment
+      env:
+          GITHUB_TOKEN: ${{ secrets.GON_GITHUB_TOKEN }}
+      run: |
+        export VAR_API_ID_DEV=$(cat ./api_id_dev.txt)
+        gh variable set API_ID --env Development --body "$VAR_API_ID_DEV"
+
+    - name: Create APIM instance in Prod
+      env:
+        ASSET_ID: ${{ vars.ASSET_ID }}
+        ASSET_VERSION: ${{ vars.ASSET_VERSION }}
+      run: |
+        anypoint-cli-v4 api-mgr:api:manage -m --deploymentType=cloudhub --organization fc9e3283-a489-4e88-99aa-cceea4aa5ea1 --environment=Production $ASSET_ID $ASSET_VERSION | sed -e "s/Created new API with ID: //g" > ./api_id_prod.txt
+    - name: create variable in Prod environment
+      env:
+          GITHUB_TOKEN: ${{ secrets.GON_GITHUB_TOKEN }}
+      run: |
+        export VAR_API_ID_PROD=$(cat ./api_id_prod.txt)
+        gh variable set API_ID --env Production --body "$VAR_API_ID_PROD"
+        
+        
