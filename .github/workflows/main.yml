@@ -34,3 +34,7 @@ jobs:
         anypoint-cli-v4 api-mgr:api:manage -m --deploymentType=cloudhub --organization fc9e3283-a489-4e88-99aa-cceea4aa5ea1 --environment=Development $ASSET_ID $ASSET_VERSION | sed -e "s/Created new API with ID: //g" > ./api_id.txt
     - name: Print api id
       run: cat ./api_id.txt
+    - name: create env variable from api_id
+      run: export API_ID=$(cat ./api_id.txt)
+    - name: check env variable
+      run: env
