@@ -23,4 +23,6 @@ jobs:
         MULE_PASSWORD: ${{ secrets.MULE_PASSWORD }}
         MULE_ORG_ID: ${{ vars.MULE_ORG_ID }}
       run: |
+        anypoint-cli-v4 conf username $MULE_USERNAME
+        anypoint-cli-v4 conf password $MULE_PASSWORD
         anypoint-cli-v4 account:environment:list
