@@ -1,4 +1,4 @@
-name: Create API Manager instances in Dev/Prod
+name: Conditional Workflow
 on:
   workflow_dispatch:
 
