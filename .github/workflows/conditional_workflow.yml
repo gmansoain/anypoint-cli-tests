@@ -4,11 +4,11 @@ on:
 
 jobs:
   create_apim_instance:
-    if: github.repository == 'octo-org/octo-repo-p'
     runs-on: ubuntu-latest
     environment: Development
     env:
       API_ID: ${{ vars.API_ID }}
+    if: env.API_ID
     steps:
     - uses: actions/checkout@v4
     # Install Node on the runner
