@@ -8,7 +8,7 @@ jobs:
     environment: Development
     env:
       API_ID: ${{ vars.API_ID }}
-    if: env.API_ID
+    if: env.API_ID == 1111
     steps:
     - uses: actions/checkout@v4
     # Install Node on the runner
