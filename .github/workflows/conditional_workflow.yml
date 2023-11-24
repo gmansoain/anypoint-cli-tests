@@ -4,6 +4,7 @@ on:
 
 jobs:
   create_apim_instance:
+    if: github.repository == 'octo-org/octo-repo-p'
     runs-on: ubuntu-latest
     environment: Development
     env:
@@ -29,7 +30,6 @@ jobs:
         anypoint-cli-v4 conf username $MULE_USERNAME
         anypoint-cli-v4 conf password $MULE_PASSWORD
     - name: Create APIM instance in Dev
-      if: env.API_ID != 'true'
       env:
         ASSET_ID: ${{ vars.ASSET_ID }}
         ASSET_VERSION: ${{ vars.ASSET_VERSION }}
